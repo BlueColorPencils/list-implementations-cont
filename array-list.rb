@@ -48,6 +48,12 @@ class ArrayList
     return @storage[biggest]
   end
 
+  def sort
+    sorted_array = []
+    (@storage.length-1).times do |stuff|
+      if @storage[stuff+1] > @storage[stuff] 
+  end
+
   def empty?
     @size == 0
   end

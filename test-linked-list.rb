@@ -42,3 +42,6 @@ ll.add(-2)
 ll.display
 puts "Size = #{ll.size}"
 puts "Max = #{ll.max}"
+
+puts "Please Sort"
+ll.sort
