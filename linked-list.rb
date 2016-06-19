@@ -87,71 +87,37 @@ class LinkedList
 
   def sort
     count = 0
-    previous = @head #[4]
-    current = @head.next_node #[2]
-    nxt = current.next_node #[5]
-    # [4] -> [2] -> [1] -> [5] -> [3]
-    # [2] -> [4] -> [1] -> [5] -> [3]
-    # puts "START"
-    # puts "#{display}"
-    # puts "D: #{display}"
+    previous = @head
+    current = @head.next_node
+    nxt = current.next_node
     while count < ((size/2))
       if (current.next_node == nil)
         count = 0
         previous = @head
         current = @head.next_node
         nxt = current.next_node
-        # puts "RESTART: #{previous.value}, #{current.value}, #{nxt.value}"
-        # puts "#{display}"
       elsif (previous == @head) && (current.value < previous.value)
-        # puts "HEAD"
         current.next_node, previous.next_node = previous, current.next_node
         current, previous, @head = previous, current, current
-        # puts "#{display}"
       elsif (nxt.value < current.value)
         if nxt.next_node != nil
           current.next_node, previous.next_node, nxt.next_node = nxt.next_node, nxt, current
-          # puts "dino: #{previous.value}, #{current.value}, #{nxt.value}"
           previous, nxt = nxt, current.next_node
-          # puts "First case: #{previous.value}, #{current.value}, #{nxt.value}"
-          # puts "#{display}"
         else
           previous.next_node, nxt.next_node, current.next_node = nxt, current, nil
-          # puts "rawr: #{previous.value}, #{current.value}, #{nxt.value}"
-          # puts "Second case: #{previous.value}, #{current.value}, #{current.next_node == nil}"
-          # puts "#{display}"
         end
 
       elsif (nxt.value > current.value)
         count += 1
         if (nxt.next_node != nil)
           previous, current, nxt = current, nxt, nxt.next_node
-              # puts "#{count}"
-              # puts "#{display}"
-          # puts "#{display}"
-          # puts "Fourth case: #{previous.value}, #{current.value}, #{nxt.value}, #{count}"
         else
-          # previous, current, current.next_node = current, current.next_node, nil
           current, current.next_node = current.next_node, nil
-
-          # puts "else #{previous.value}, #{current.value}, #{nxt.value}, #{count}"
-          # puts "#{display}"
         end
       end
     end
     return display
   end
-
-  #   current.next_node, previous.next_node = previous, nxt
-  #   previous, current = current, previous
-  #   puts "Third case: #{previous.value}, #{current.value}, #{nxt.value}"
-  # elsif (current.value > previous.value) && (current.value < nxt.value)
-
-
-  # elsif (nxt.value > current.value)
-  #   current.next_node, previous.next_node, nxt.next_node = nxt.next_node, nxt, current
-  #   previous, nxt = nxt, current.next_node
-  #   puts "Second case: #{previous.value}, #{current.value}, #{nxt.value}"
 
    def max
      return nil if @size == 0
