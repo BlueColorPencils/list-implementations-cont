@@ -90,16 +90,28 @@ class LinkedList
     previous = @head
     current = @head.next_node
     nxt = current.next_node
-    while count < ((size/2))
+    size % 2 == 0? counter = (size/2) : counter = (size/2)+1
+
+    while count < counter
+      # // edge case at the end.. if at the end of the list
       if (current.next_node == nil)
         count = 0
         previous = @head
         current = @head.next_node
         nxt = current.next_node
-      elsif (previous == @head) && (current.value < previous.value)
-        current.next_node, previous.next_node = previous, current.next_node
-        current, previous, @head = previous, current, current
-      elsif (nxt.value < current.value)
+      end
+
+      # // edge case at the front .. if at the head & the current value is less than the head
+      if (previous == @head) && (current.value < previous.value)
+      # reassign the pointers
+      current.next_node, previous.next_node = previous, current.next_node
+      #  reassign the node pointers
+      current, previous, @head = previous, current, current
+      end
+
+      # if current is greater than next value
+      if (nxt.value < current.value)
+        # if at the end
         if nxt.next_node != nil
           current.next_node, previous.next_node, nxt.next_node = nxt.next_node, nxt, current
           previous, nxt = nxt, current.next_node
@@ -107,8 +119,10 @@ class LinkedList
           previous.next_node, nxt.next_node, current.next_node = nxt, current, nil
         end
 
+      # if current is less than next value
       elsif (nxt.value > current.value)
         count += 1
+        # if at the end
         if (nxt.next_node != nil)
           previous, current, nxt = current, nxt, nxt.next_node
         else
@@ -116,37 +130,26 @@ class LinkedList
         end
       end
     end
-    return display
+    # return display
   end
+
+
+
 
   def reverse
-    num = (size-1)
-    outercount = 1
-    while outercount < size
-      previous = @head
-      current = @head.next_node
+    previous = @head
+    current = previous.next_node
+    previous.next_node = nil #set the beginning to be the end
 
-      while num > 0
-        if (current.next_node == nil)
-          last_one = current
-          current.next_node = previous
-        elsif (outercount == (size-1))
-          first_one = previous
-          current.next_node = previous
-        elsif (num == 1)
-          current.next_node = previous
-        else
-          previous, current = current, current.next_node
-        end
-        num -= 1
-      end
-      outercount += 1
-      num = size - outercount
+    until (current.next_node == nil)
+      # change the pointer to the one before it
+      # move node pointers one down the list
+      current.next_node, previous, current = previous, current, current.next_node
     end
-
-  @head, first_one.next_node = last_one, nil
-  return display
+    # set the last node to head and point to the previous
+    current.next_node, @head= previous, current
   end
+
 
    def max
      return nil if @size == 0

@@ -45,6 +45,20 @@ puts "Max = #{ll.max}"
 
 puts "Please Sort"
 ll.sort
+ll.display
 
 puts "Reverse Reverse"
 ll.reverse
+ll.display
+
+puts "Adds 123"
+ll.add(123)
+ll.display
+
+puts "Please Sort"
+ll.sort
+ll.display
+
+puts "Reverse Reverse"
+ll.reverse
+ll.display
